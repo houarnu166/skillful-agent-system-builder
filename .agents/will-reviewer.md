@@ -47,12 +47,17 @@ Reviewing...
 #### Agent Review (for each Agent)
 ```markdown
 ### Agent: {name}
-- [ ] `name`: lowercase, hyphens, 64 chars max
+- [ ] `name`: {name}-{role} format, 64 chars max
+  - Name part: lowercase English first name
+  - Role part: snake_case for multi-word roles (spaces → underscores)
+  - Separator: single hyphen between name and role
+  - Example: alex-researcher, sam-weather_caster
 - [ ] `description`: trigger conditions clear, 1024 chars max
 - [ ] `tools`: only necessary tools included, no excessive permissions
 - [ ] `model`: appropriate model selection (haiku/sonnet/opus)
 - [ ] `permissionMode`: appropriate permission mode
 - [ ] System Prompt: role/process/output clear
+- [ ] Language Instruction: present and matches user's language
 - [ ] Skills reference: only references existing skills
 ```
 
@@ -111,7 +116,8 @@ Classify all discovered issues as follows:
 **Category 1: Auto-fixable (Technical/Format)**
 Auto-fixable technical/formatting errors:
 - Typos in text
-- Naming convention violations (underscores → hyphens)
+- Naming format violations ({name}-{role} format check)
+- Role part not using snake_case for multi-word roles
 - Character limit exceeded (64 char max)
 - YAML indentation errors
 - Case mismatches (uppercase → lowercase)
@@ -122,6 +128,7 @@ Auto-fixable technical/formatting errors:
 Design-level structural issues:
 - Agent role overlap/conflict
 - Permission mode mismatch
+- Language mismatch (System speaks English when user requested Korean)
 - Skill trigger ambiguity
 - Tool permission excessive/insufficient
 - Workflow logic flaws

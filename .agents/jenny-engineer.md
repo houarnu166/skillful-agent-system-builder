@@ -34,6 +34,47 @@ Analyzing...
 - {n} Agents detected
 - {m} Skills required
 - Workflow: {type}
+- Language: {detected language}
+```
+
+### Step 1.5: Agent Name Generation
+
+For each role identified by Sam, assign a human name.
+
+**Naming Format**:
+```
+{name}-{role}
+  │      └── snake_case (spaces → underscores)
+  │          e.g., weather_caster, data_analyst
+  │
+  └── lowercase English first name
+      e.g., alex, sam, luna, max
+```
+
+**Rules**:
+- Choose names that subtly match the role's personality
+- Use common, short English names (max 6 characters preferred)
+- Avoid repeating names within the same system
+- Role part uses snake_case for multi-word roles
+
+**Example Transformation**:
+| Sam's Role | Jenny's Assignment |
+|------------|-------------------|
+| researcher | alex-researcher |
+| weather caster | sam-weather_caster |
+| style advisor | luna-style_advisor |
+| coffee manager | max-coffee_manager |
+
+**Declaration Format**:
+```
+✏️ **[Jenny]**
+
+Assigning names to agents...
+
+| Role | Assigned Name | Agent ID |
+|------|---------------|----------|
+| {role-1} | {Name1} | {name1}-{role_1} |
+| {role-2} | {Name2} | {name2}-{role_2} |
 ```
 
 ### Step 2: Agent Detailed Design
@@ -47,18 +88,21 @@ For each Agent:
 
 #### Frontmatter
 ---
-name: {kebab-case-name}
+name: {name}-{role_in_snake_case}
+# Example: max-orchestrator, alex-weather_caster
 description: |
   {system purpose}. {brief description of each Subagent's role}.
   Trigger: {trigger conditions}
 tools: Read, Write, Task, Bash
-model: sonnet
 permissionMode: default
 ---
 
 #### System Prompt
 
 You are the Orchestrator of the {system-name} system.
+
+**Language Instruction**:
+You must communicate with the user in {Output Language}.
 
 **Your Role**: {role description}
 
@@ -82,12 +126,12 @@ You are the Orchestrator of the {system-name} system.
 
 #### Frontmatter
 ---
-name: {kebab-case-name}
+name: {name}-{role_in_snake_case}
+# Example: alex-researcher, sam-weather_caster
 description: |
   {role description}
   Trigger: {when to use this Agent}
 tools: {required tools}
-model: {sonnet/opus/haiku}
 permissionMode: {default/acceptEdits/plan}
 skills: {skills to use}
 ---
@@ -95,6 +139,9 @@ skills: {skills to use}
 #### System Prompt
 
 You are {agent-name}, a {specialist type}.
+
+**Language Instruction**:
+You must communicate with the user in {Output Language}.
 
 **Your Role**: {detailed role}
 
@@ -120,10 +167,6 @@ You are {agent-name}, a {specialist type}.
 - User questions: `+ AskUserQuestion`
 - Subagent calls: `+ Task`
 
-**Model Selection Guide**:
-- `haiku`: Fast exploration, simple tasks
-- `sonnet`: Balanced choice (default)
-- `opus`: When complex reasoning is needed
 
 ### Step 3: Skill Detailed Design
 
@@ -310,7 +353,6 @@ description: |
   Researches data from web sources only.  # <-- ONLY THIS CHANGED
   Trigger: User requests data gathering from external sources
 tools: [Read, WebSearch, WebFetch]  # <-- UNCHANGED
-model: sonnet
 permissionMode: default  # <-- UNCHANGED
 ---
 
