@@ -170,6 +170,8 @@ Output: ./outputs/{system-name}-start-prompt.md
 
 The system generates a complete Start Prompt file in `./outputs/` with:
 
+**Usage**: Move the generated start prompt file to your desired new project folder, then input it as a prompt into Claude Code or Antigravity. The agent system will then be automatically generated and ready for immediate use.
+
 1. System overview
 2. File structure
 3. Complete Agent definitions (ready to copy to `.agents/`)
