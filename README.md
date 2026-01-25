@@ -65,10 +65,11 @@ skillful-agent-system-builder/
 │       │   └── SKILL.md
 │       └── anthropic-reference/
 │           └── SKILL.md
-├── context/                             # Anthropic documentation
+├── context/                             # Persistent context & resources (always available)
+├── inputs/                              # Task-specific input materials (temporary for current run)
 ├── temp/                                # Temporary session files
 │   └── skillful-session/
-└── outputs/                             # Generated Start Prompts
+└── outputs/                             # Final output generation path
 ```
 
 ## Usage

@@ -65,10 +65,11 @@ skillful-agent-system-builder/
 │       │   └── SKILL.md
 │       └── anthropic-reference/
 │           └── SKILL.md
-├── context/                             # Anthropic 문서
+├── context/                             # 상시 활용 가능한 프로젝트 공통 자료
+├── inputs/                              # 해당 요청에만 한정적으로 활용할 현행 자료
 ├── temp/                                # 임시 세션 파일
 │   └── skillful-session/
-└── outputs/                             # 생성된 시작 프롬프트
+└── outputs/                             # 결과물 산출 경로
 ```
 
 ## 사용법
