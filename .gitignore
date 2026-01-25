@@ -1,0 +1,20 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE Configuration
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project Specific Directories
+temp/*
+!temp/.gitkeep
+outputs/*
+!outputs/.gitkeep
+.claude/settings.local.json
+.obsidian/
+
+# Logs and history
+*.log
