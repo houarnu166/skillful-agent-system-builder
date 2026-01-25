@@ -256,7 +256,11 @@ Output: ./outputs/code-review-automation-start-prompt.md
 ---
 
 **Version**: 1.0
+
 **Created**: 2026-01-17
+
 **Status**: ✅ Production Ready
+
 **author**: [Yz](mailto:houarnu166@gmail.com)
+
 **contributor**: 해당 시스템은 [필로소피 AI](https://www.youtube.com/@%ED%95%84%EB%A1%9C%EC%86%8C%ED%94%BC)의 유튜브 영상과 함께 제공된 프롬프트와 시스템에 영향을 받아 제작됐습니다.    This system was developed based on the prompts and system provided alongside the YouTube video from [Philosophy AI](https://www.youtube.com/@%ED%95%84%EB%A1%9C%EC%86%8C%ED%94%BC).
