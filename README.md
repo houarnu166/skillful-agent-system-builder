@@ -1,270 +1,192 @@
 # Skillful Agent System Builder
 
-> A 3-stage collaborative system that designs custom Agent+Skill systems through Sam (Requirements) → Jenny (Design) → Will (Review)
+> Just say **"Create a code review system"**, and AI will design a custom agent team through conversation.
 
 [🇰🇷 한국어 버전 README문서 (Korean Version)](./README(kor).md)
 
-## What is this?
+## Who is this for?
 
-Skillful Agent System Builder helps you create **custom AI agent teams** without writing complex prompts from scratch.
+- ✅ You want to build a **multi-agent system** in Claude Code or Antigravity, but don't know where to start with prompts
+- ✅ You need a **custom AI assistant** to automate repetitive tasks
+- ✅ You want to quickly apply **best practices** for agent/skill design
 
-**Problem it solves**: Building multi-agent systems requires designing detailed prompts, defining agent roles, and ensuring quality. This is time-consuming and error-prone.
+## Understand in 30 Seconds
 
-**Solution**: A 3-stage collaborative system where specialized AI agents (Sam, Jenny, Will) help you design production-ready agent systems through conversation.
+**Input** (what you do):
+```
+"I need an agent system that helps educators create teaching materials on specific topics"
+```
 
-## Getting Started (5 minutes)
+**Output** (what the system creates):
+```
+./outputs/lesson-material-generator-start-prompt.md
+./outputs/lesson-material-generator/
+    ├── .agents/
+    │   ├── lesson-planner.md
+    │   ├── content-writer.md
+    │   └── skills/...
+    └── AGENTS.md
+```
 
-### Option 1: Antigravity
-1. Open this repository in your Antigravity IDE.
-2. Ensure you have the Antigravity agent active.
-3. Say: "Create an agent system for [your use case]"
-4. Follow Sam's questions, review Jenny's design, get Will's quality check.
+**Result**: Ready-to-use agent team design + project files
 
-### Option 2: Claude Code
-1. Clone this repository.
-2. Open in Claude Code.
-3. Say: "Create an agent system for [your use case]"
-4. Follow Sam's questions, review Jenny's design, get Will's quality check.
-
-Your custom agent system is ready in `./outputs/`.
-
-## Terminology
-
-- **Orchestrator**: The central manager that directs the workflow between you and the specialized agents.
-- **Subagent**: Specialized AI agents (Sam, Jenny, Will) that handle specific parts of the process (Requirements, Design, Review).
-- **Skill**: Specific capabilities or knowledge bases that agents uses to perform their tasks.
-- **Start Prompt**: The final output file that contains the complete instruction set to spin up your custom agent team.
+---
 
 ## Quick Start
 
-### Prerequisites
+### Requirements
+- **Claude Code** or **Antigravity IDE** (AI agent runtime environment)
 
-1. **Context Files**: Ensure these files are in the `./context/` directory (included in this repository):
-   - `anthropic-skills-guide.md`
-   - `anthropic-subagents-guide.md`
-   - `example-skills-mcp-builder-SKILL.md`
-   - `example-skills-skill-creator-SKILL.md`
+### How to Run
+1. Clone or download this repository
+2. Open in Claude Code or Antigravity
+3. Say:
+   ```
+   "Create an agent system for [your use case]"
+   ```
+4. Answer the AI's questions, and you're done!
 
-2. **Claude Code**: Make sure you have Claude Code installed and can access the `.agents/` directory.
+Results are generated in the `./outputs/` folder.
 
-### File Structure
+---
+
+## How It Works
+
+4 specialized AI agents collaborate in sequence:
+
+| Step | Agent | Role |
+|:---:|---------|------|
+| 1️⃣ | **Sam** | Gathers requirements and asks questions |
+| 2️⃣ | **Jenny** | Creates detailed agent and skill designs |
+| 3️⃣ | **Will** | Validates quality and fixes issues |
+| 4️⃣ | **Tom** | Generates final documents and project files |
 
 ```
-skillful-agent-system-builder/
-├── README.md                            # Main system documentation
-├── AGENTS.md                            # Orchestrator & Agent guide
-├── .agents/                              # Agent definitions
-│   ├── skillful-orchestrator.md         # Main orchestrator
-│   ├── sam-analyst.md                   # Requirements analyst
-│   ├── jenny-engineer.md                # Design engineer
-│   ├── will-reviewer.md                 # Quality reviewer
-│   └── skills/                          # Skill definitions
-│       ├── agent-design/
-│       │   └── SKILL.md
-│       ├── skill-design/
-│       │   └── SKILL.md
-│       ├── quality-checklist/
-│       │   └── SKILL.md
-│       └── anthropic-reference/
-│           └── SKILL.md
-├── context/                             # Persistent context & resources (always available)
-├── inputs/                              # Task-specific input materials (temporary for current run)
-├── temp/                                # Temporary session files
-│   └── skillful-session/
-└── outputs/                             # Final output generation path
+Your Request → Sam → Jenny → Will → Tom → Complete Agent System
 ```
 
-## Usage
+### Two Modes
 
-### Basic Commands
+| Mode | Usage | Description |
+|------|-------|-------------|
+| **Normal Mode** | `"Create a..."` | Agent asks questions for careful design |
+| **Fast Mode** | `"Quickly. Create a..."` | Immediate output without questions |
 
-1. **Standard Request**: Full 3-stage process with questions
-   ```
-   "Create an agent system for educators"
-   ```
+---
 
-2. **Fast Mode**: Skip questions, use reasonable assumptions
-   ```
-   "Proceed quickly. Design a content creation system for marketers"
-   ```
+## Usage Examples
 
-3. **Stage-Specific Entry**:
-   - `"Start from Sam"` - Start from requirements gathering
-   - `"Go to Jenny stage"` - Start from detailed design (requires sam-draft.md)
-   - `"Will review"` - Start from review (requires jenny-draft.md)
-
-4. **Modification Requests**:
-   ```
-   "Sam, I think we need more Agents"
-   "Jenny, please write more detailed Skill examples"
-   "Will, please review again"
-   ```
-
-### Workflow
-
+### Example 1: Customer Support System (Normal Mode)
 ```
-User Request
-    ↓
-[Orchestrator] Initialize session → Clear temp/ → Create session.json
-    ↓
-[Orchestrator] Recognize command → Determine entry point
-    ↓
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Stage 1: Requirements (Sam)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    ↓
-[sam-analyst] Gather requirements
-    ├─ Fast mode? Skip questions
-    └─ Normal mode? Ask 2-3 questions
-    ↓
-Output: ./temp/skillful-session/sam-draft.md
-    ↓
-[Orchestrator] User confirmation (if not fast mode)
-    ↓
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Stage 2: Design (Jenny)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    ↓
-[jenny-engineer] Create detailed design
-    ├─ Design Agents (frontmatter + system prompt)
-    ├─ Design Skills (SKILL.md structure)
-    └─ Reference ./context/ as needed
-    ↓
-Output: ./temp/skillful-session/jenny-draft.md
-    ↓
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Stage 3: Review (Will)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    ↓
-[will-reviewer] Quality review
-    ├─ Apply quality checklist
-    ├─ Verify against ./context/ docs
-    └─ Fix issues automatically
-    ↓
-Output: ./outputs/{system-name}-start-prompt.md
-    ↓
-🎉 Complete!
+Input: "I need a system that classifies customer inquiries, auto-responds with FAQ, and escalates complex issues to staff"
+
+Output:
+- 3 Agents: inquiry-classifier, faq-responder, escalation-handler
+- 2 Skills: faq-knowledge-base, ticket-routing-rules
 ```
 
-## System Components
+### Example 2: Code Review System (Fast Mode)
+```
+Input: "Quickly. A system that analyzes PR code to find potential bugs and security vulnerabilities"
 
-### Agents
+Output:
+- 3 Agents: code-analyzer, bug-detector, security-checker
+- 2 Skills: code-quality-rules, security-best-practices
+```
 
-| Agent | Role | Key Responsibilities |
-|-------|------|---------------------|
-| **skillful-orchestrator** | Coordinator | Session management, command recognition, agent delegation |
-| **sam-analyst** | Requirements Analyst | User interviews, requirement gathering, draft creation |
-| **jenny-engineer** | Design Engineer | Agent/Skill detailed design, architecture decisions |
-| **will-reviewer** | Quality Reviewer | Quality assurance, validation, final output generation |
-
-### Skills
-
-| Skill | Purpose | Used By |
-|-------|---------|---------|
-| **agent-design** | Agent frontmatter & system prompt guidelines | Jenny, Will |
-| **skill-design** | Skill SKILL.md & bundled resources guidelines | Jenny, Will |
-| **quality-checklist** | Comprehensive quality verification checklist | Will |
-| **anthropic-reference** | Quick reference to ./context/ documentation | Jenny, Will |
+---
 
 ## Output
 
-The system generates a complete Start Prompt file in `./outputs/` with:
+The **Start Prompt** file generated by the system includes:
 
-**Usage**: Move the generated start prompt file to your desired new project folder, then input it as a prompt into Claude Code or Antigravity. The agent system will then be automatically generated and ready for immediate use.
-
-1. System overview
-2. File structure
-3. Complete Agent definitions (ready to copy to `.agents/`)
-4. Complete Skill definitions (ready to copy to `.agents/skills/`)
+1. System overview and purpose
+2. File structure (`.agents/` based)
+3. All agent definitions (ready to copy and use)
+4. All skill definitions
 5. Workflow documentation
-6. Usage instructions
-7. Example scenarios
-8. Design decisions
-9. Quality verification checklist
+6. Usage examples
 
-## Design Principles
+**Usage**: Copy the generated Start Prompt to a new project folder and input it into Claude Code or Antigravity. The agent system will be automatically generated.
 
-1. **3-Stage Collaboration**: Separation of concerns (requirements → design → review)
-2. **Progressive Disclosure**: Skills use 3-level loading (metadata → instructions → resources)
-3. **Minimum Privilege**: Agents only get tools they need
-4. **Session Isolation**: Clean temp/ on each new request
-5. **Orchestrator Pattern**: All communication goes through orchestrator
-6. **Quality First**: Comprehensive checklist validation
+---
+
+## Project Structure
+
+```
+skillful-agent-system-builder/
+├── .agents/                  # This system's agents
+│   ├── sam-analyst.md        # Requirements analysis
+│   ├── jenny-engineer.md     # Design
+│   ├── will-reviewer.md      # Quality review
+│   └── tom-builder.md        # Output generation
+├── context/                  # Reference docs (Anthropic guides, etc.)
+├── outputs/                  # Output destination
+└── temp/                     # Temporary work files
+```
+
+---
+
+## Terminology
+
+| Term | Description |
+|------|-------------|
+| **Agent** | An AI that performs a specific role. e.g., Code Analyzer, Document Writer |
+| **Skill** | A collection of knowledge/tools used by agents. e.g., Coding Rules, Doc Templates |
+| **Start Prompt** | Complete design document for creating an agent team |
+| **Orchestrator** | Central manager that coordinates multiple agents |
+
+---
 
 ## Customization
 
 ### Add New Agent
-
-Create a new `.md` file in `.agents/` with proper frontmatter and system prompt.
+Create a new `.md` file in the `.agents/` folder
 
 ### Add New Skill
-
-1. Create directory: `.agents/skills/{skill-name}/`
-2. Create `SKILL.md` with frontmatter and content
-3. Add optional: `references/`, `scripts/`, `assets/`
+Create `.agents/skills/{skill-name}/SKILL.md` file
 
 ### Modify Workflow
+Edit [skillful-orchestrator.md](.agents/skillful-orchestrator.md)
 
-Edit the orchestrator's workflow phases in [skillful-orchestrator.md](.agents/skillful-orchestrator.md).
+---
 
 ## Troubleshooting
 
-### Session Issues
-- **Problem**: Old session data interfering
-- **Solution**: Orchestrator auto-clears `./temp/skillful-session/` on each new request
+| Problem | Solution |
+|---------|----------|
+| Previous session data interfering | `./temp/` folder is automatically cleared |
+| Missing context files | Verify required files exist in `./context/` |
+| File write permission errors | Check `permissionMode: acceptEdits` in agent frontmatter |
 
-### Missing Context Files
-- **Problem**: Jenny/Will can't validate against Anthropic docs
-- **Solution**: Ensure all 4 files are in `./context/` directory
-
-### Permission Errors
-- **Problem**: Agents can't write files
-- **Solution**: Check `permissionMode: acceptEdits` in frontmatter
-
-## Examples
-
-### Example 1: Education System
-```
-User: "Create an agent system for educators"
-
-Output: ./outputs/educator-system-start-prompt.md
-- 4 Agents: orchestrator, lesson-planner, exam-creator, parent-communicator
-- 3 Skills: education-curriculum, assessment-design, communication-templates
-```
-
-### Example 2: Code Review System
-```
-User: "Proceed quickly. I need a code review automation system"
-
-Output: ./outputs/code-review-automation-start-prompt.md
-- 3 Agents: orchestrator, code-analyzer, security-checker
-- 2 Skills: code-quality-rules, security-best-practices
-```
-
-## Contributing
-
-To improve this system:
-
-1. Add more example Skills in `.agents/skills/`
-2. Enhance quality checklists in `quality-checklist/SKILL.md`
-3. Add more context documentation in `./context/`
-4. Improve error handling in orchestrator
+---
 
 ## Resources
 
 - [Anthropic Skills Guide](./context/anthropic-skills-guide.md)
 - [Anthropic Subagents Guide](./context/anthropic-subagents-guide.md)
-- [Example: MCP Builder](./context/example-skills-mcp-builder-SKILL.md)
-- [Example: Skill Creator](./context/example-skills-skill-creator-SKILL.md)
 
 ---
 
-**Version**: 1.0
+**Version**: 1.1 | **Created**: 2026-01-28 | **Status**: ✅ Production Ready
 
-**Created**: 2026-01-17
+**Author**: [Yz](mailto:houarnu166@gmail.com)
 
-**Status**: ✅ Production Ready
+## Changelog
 
-**author**: [Yz](mailto:houarnu166@gmail.com)
+### v1.1 (2026-01-28)
+- **New Agent**: Added `tom-builder` (Output Specialist)
+- **Role Adjustment**: Will now focuses on quality verification; Tom handles Start Prompt generation and project building
+- **New Skills**: Added `verification-before-completion`, `concise-planning`, `context-window-management`, etc.
+- **Fast Mode Enhancement**: Automatically proceeds to project building without user questions
 
-**contributor**: 해당 시스템은 [필로소피 AI](https://www.youtube.com/@%ED%95%84%EB%A1%9C%EC%86%8C%ED%94%BC)의 유튜브 영상과 함께 제공된 프롬프트와 시스템에 영향을 받아 제작됐습니다.    This system was developed based on the prompts and system provided alongside the YouTube video from [Philosophy AI](https://www.youtube.com/@%ED%95%84%EB%A1%9C%EC%86%8C%ED%94%BC).
+### v1.0 (2026-01-17)
+- Initial release
+
+## Sources and Attribution
+
+| Source | Description |
+|--------|-------------|
+| [Philosophy AI](https://www.youtube.com/@%ED%95%84%EB%A1%9C%EC%86%8C%ED%94%BC) | Prompt provided with the YouTube video, System Basics |
+| [anthropics/skills](https://github.com/anthropics/skills) | Official Anthropic skills repository |
+| [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | Skills used by agents |
